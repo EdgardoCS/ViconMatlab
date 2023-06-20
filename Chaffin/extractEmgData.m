@@ -13,45 +13,182 @@ Shoulder
 Wrist
 %}
 
+clc; clear;
 
-location = "D:\Vicon Database\Tesis_Escritorio\Experiment\Subject01\Manipulacion02.csv";
+targetSubject = "Subject10";
+
+target1 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Escritura01.csv"],"");
+target2 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Escritura02.csv"],"");
+target3 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Lectura01.csv"],"");
+target4 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Lectura02.csv"],"");
+target5 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Digitacion01.csv"],"");
+target6 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Digitacion02.csv"],"");
+target7 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsPc01.csv"],"");
+target8 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsPc02.csv"],"");
+target9 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet01.csv"],"");
+target10 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet02.csv"],"");
+target11 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion01.csv"],"");
+target12 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion02.csv"],"");
+
+
 startFrame = 12;
-endFrame = 365831;
 
-temp  = extractDataEmg(location, startFrame, endFrame);
+disp ('Extracting Data...')
+%% 
+data = readmatrix(target1);
+idx_start = data(4,1);
+idx_end = data(end,1);
 
-C02_T6_deltAnt = temp(:,6);
-C02_T6_deltMed = temp(:,5);
-C02_T6_trapSup = temp(:,4);
-C02_T6_trapMed = temp(:,3);
-C02_T6_trapInf = temp(:,2);
-C02_T6_serrAnt = temp(:,1);
+C01_T1_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C01_T1_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C01_T1_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C01_T1_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T1_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T1_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task1, Condition1. Status Ok')
 
-clear endFrame location startFrame temp
+%%
+data = readmatrix(target2);
+idx_start = data(4,1);
+idx_end = data(end,1);
 
+C02_T1_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C02_T1_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C02_T1_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C02_T1_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T1_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T1_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task1, Condition2. Status Ok')
 
-function [data] = extractDataEmg(location, startFrame, endFrame)
+%%
+data = readmatrix(target3);
+idx_start = data(4,1);
+idx_end = data(end,1);
 
-opts = delimitedTextImportOptions("NumVariables", 18);
+C01_T2_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C01_T2_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C01_T2_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C01_T2_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T2_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T2_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task2, Condition1. Status Ok')
 
-% Specify range and delimiter
-opts.DataLines = [startFrame, endFrame];
-opts.Delimiter = ",";
+%%
+data = readmatrix(target4);
+idx_start = data(4,1);
+idx_end = data(end,1);
 
-% Specify column names and types
-opts.VariableNames = ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "IMEMG7", "IMEMG8", "IMEMG9", "IMEMG10", "IMEMG11", "IMEMG12", "Var15", "Var16", "Var17", "Var18"];
-opts.SelectedVariableNames = ["IMEMG7", "IMEMG8", "IMEMG9", "IMEMG10", "IMEMG11", "IMEMG12"];
-opts.VariableTypes = ["string", "string", "string", "string", "string", "string", "string", "string", "double", "double", "double", "double", "double", "double", "string", "string", "string", "string"];
+C02_T2_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C02_T2_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C02_T2_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C02_T2_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T2_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T2_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task2, Condition2. Status Ok')
 
-% Specify file level properties
-opts.ExtraColumnsRule = "ignore";
-opts.EmptyLineRule = "read";
+%%
+data = readmatrix(target5);
+idx_start = data(4,1);
+idx_end = data(end,1);
 
-% Specify variable properties
-opts = setvaropts(opts, ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var15", "Var16", "Var17", "Var18"], "WhitespaceRule", "preserve");
-opts = setvaropts(opts, ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var15", "Var16", "Var17", "Var18"], "EmptyFieldRule", "auto");
+C01_T3_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C01_T3_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C01_T3_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C01_T3_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T3_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T3_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task3, Condition1. Status Ok')
 
-% Import the data
-data = readtable(location, opts);
+%%
+data = readmatrix(target6);
+idx_start = data(4,1);
+idx_end = data(end,1);
 
-end
+C02_T3_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C02_T3_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C02_T3_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C02_T3_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T3_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T3_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task3, Condition2. Status Ok')
+
+%%
+data = readmatrix(target7);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+C01_T4_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C01_T4_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C01_T4_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C01_T4_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T4_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T4_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task4, Condition1. Status Ok')
+
+%%
+data = readmatrix(target8);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+C02_T4_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C02_T4_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C02_T4_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C02_T4_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T4_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T4_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task4, Condition2. Status Ok')
+
+%%
+data = readmatrix(target9);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+C01_T5_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C01_T5_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C01_T5_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C01_T5_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T5_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T5_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task5, Condition1. Status Ok')
+
+%%
+data = readmatrix(target10);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+C02_T5_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C02_T5_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C02_T5_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C02_T5_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T5_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T5_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task5, Condition2. Status Ok')
+
+%%
+data = readmatrix(target11);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+C01_T6_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C01_T6_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C01_T6_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C01_T6_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T6_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C01_T6_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task6, Condition1. Status Ok')
+
+%%
+data = readmatrix(target12);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+C02_T6_deltAnt = data(4:((idx_end-idx_start)+1)*20,9);
+C02_T6_deltMed = data(4:((idx_end-idx_start)+1)*20,10);
+C02_T6_trapSup = data(4:((idx_end-idx_start)+1)*20,11);
+C02_T6_trapMed = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T6_trapInf = data(4:((idx_end-idx_start)+1)*20,13);
+C02_T6_serrAnt = data(4:((idx_end-idx_start)+1)*20,14);
+disp ('Task6, Condition2. Status Ok')
+
+%%
+disp('All done')

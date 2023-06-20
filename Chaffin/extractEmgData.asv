@@ -1,0 +1,125 @@
+%{
+Escritura
+Lectura
+Digitacion
+FittsPc
+FittsTablet
+Manipulacion
+%}
+
+%{
+Elbow
+Shoulder
+Wrist
+%}
+clc; clear;
+
+targetSubject = "Subject02";
+
+target1 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Escritura01.csv"],"");
+target2 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Escritura02.csv"],"");
+target3 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Lectura01.csv"],"");
+target4 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Lectura02.csv"],"");
+target5 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Digitacion01.csv"],"");
+target6 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Digitacion02.csv"],"");
+target7 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsPc01.csv"],"");
+target8 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsPc02.csv"],"");
+target9 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet01.csv"],"");
+target10 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet02.csv"],"");
+target11 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion01.csv"],"");
+target12 = join(["C:\Users\Usuario\OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Tesis_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion02.csv"],"");
+
+
+data = readmatrix(target);
+idx_start = data(4,1);
+idx_end = data(end,1);
+
+startFrame = 12;
+endFrame = ((idx_end-idx_start)+1)*20;
+
+C01_T1_deltAnt = data1(4:endFrame,9);
+C01_T1_deltMed = data1(4:endFrame,10);
+C01_T1_trapSup = data1(4:endFrame,11);
+C01_T1_trapMed = data1(4:endFrame,13);
+C01_T1_trapInf = data1(4:endFrame,13);
+C01_T1_serrAnt = data1(4:endFrame,14);
+
+C02_T1_deltAnt = data2(4:endFrame,9);
+C02_T1_deltMed = data2(4:endFrame,10);
+C02_T1_trapSup = data2(4:endFrame,11);
+C02_T1_trapMed = data2(4:endFrame,13);
+C02_T1_trapInf = data2(4:endFrame,13);
+C02_T1_serrAnt = data2(4:endFrame,14);
+
+C01_T2_deltAnt = data3(4:endFrame,9);
+C01_T2_deltMed = data3(4:endFrame,10);
+C01_T2_trapSup = data3(4:endFrame,11);
+C01_T2_trapMed = data3(4:endFrame,13);
+C01_T2_trapInf = data3(4:endFrame,13);
+C01_T2_serrAnt = data3(4:endFrame,14);
+
+C02_T2_deltAnt = data4(4:endFrame,9);
+C02_T2_deltMed = data4(4:endFrame,10);
+C02_T2_trapSup = data4(4:endFrame,11);
+C02_T2_trapMed = data4(4:endFrame,13);
+C02_T2_trapInf = data4(4:endFrame,13);
+C02_T2_serrAnt = data4(4:endFrame,14);
+
+C01_T3_deltAnt = data5(4:endFrame,9);
+C01_T3_deltMed = data5(4:endFrame,10);
+C01_T3_trapSup = data5(4:endFrame,11);
+C01_T3_trapMed = data5(4:endFrame,13);
+C01_T3_trapInf = data5(4:endFrame,13);
+C01_T3_serrAnt = data5(4:endFrame,14);
+
+C02_T3_deltAnt = data6(4:endFrame,9);
+C02_T3_deltMed = data6(4:endFrame,10);
+C02_T3_trapSup = data6(4:endFrame,11);
+C02_T3_trapMed = data6(4:endFrame,13);
+C02_T3_trapInf = data6(4:endFrame,13);
+C02_T3_serrAnt = data6(4:endFrame,14);
+
+C01_T4_deltAnt = data7(4:endFrame,9);
+C01_T4_deltMed = data7(4:endFrame,10);
+C01_T4_trapSup = data7(4:endFrame,11);
+C01_T4_trapMed = data7(4:endFrame,13);
+C01_T4_trapInf = data7(4:endFrame,13);
+C01_T4_serrAnt = data7(4:endFrame,14);
+
+C02_T4_deltAnt = data8(4:endFrame,9);
+C02_T4_deltMed = data8(4:endFrame,10);
+C02_T4_trapSup = data8(4:endFrame,11);
+C02_T4_trapMed = data8(4:endFrame,13);
+C02_T4_trapInf = data8(4:endFrame,13);
+C02_T4_serrAnt = data8(4:endFrame,14);
+
+C01_T5_deltAnt = data9(4:endFrame,9);
+C01_T5_deltMed = data9(4:endFrame,10);
+C01_T5_trapSup = data9(4:endFrame,11);
+C01_T5_trapMed = data9(4:endFrame,13);
+C01_T5_trapInf = data9(4:endFrame,13);
+C01_T5_serrAnt = data9(4:endFrame,14);
+
+C02_T5_deltAnt = data10(4:endFrame,9);
+C02_T5_deltMed = data10(4:endFrame,10);
+C02_T5_trapSup = data10(4:endFrame,11);
+C02_T5_trapMed = data10(4:endFrame,13);
+C02_T5_trapInf = data10(4:endFrame,13);
+C02_T5_serrAnt = data10(4:endFrame,14);
+
+C01_T6_deltAnt = data11(4:endFrame,9);
+C01_T6_deltMed = data11(4:endFrame,10);
+C01_T6_trapSup = data11(4:endFrame,11);
+C01_T6_trapMed = data11(4:endFrame,13);
+C01_T6_trapInf = data11(4:endFrame,13);
+C01_T6_serrAnt = data11(4:endFrame,14);
+
+C02_T6_deltAnt = data12(4:endFrame,9);
+C02_T6_deltMed = data6(4:endFrame,10);
+C02_T6_trapSup = data6(4:endFrame,11);
+C02_T6_trapMed = data6(4:endFrame,13);
+C02_T6_trapInf = data6(4:endFrame,13);
+C02_T6_serrAnt = data6(4:endFrame,14);
+
+
+disp('All done')
