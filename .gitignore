@@ -1,3 +1,8 @@
 # ignore
 
 *.mat
+*.hpf
+*.xlsx
+
+venv/
+.idea/
