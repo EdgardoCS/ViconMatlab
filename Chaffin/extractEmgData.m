@@ -13,7 +13,7 @@
 
 clc; clear;
 
-targetSubject = "Subject16";
+targetSubject = "Subject20";
 
 % Working directory between workstations
 if exist("C:/Users/Usuario/", 'dir')
