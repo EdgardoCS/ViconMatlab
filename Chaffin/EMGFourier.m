@@ -21,27 +21,27 @@ p = abs(p/L);
 p = p(1:L/2+1); 
 p(2:end-1) = 2*p(2:end-1);
 
-% subplot(3,2,i)
-% plot(f, p)
-% ylim([0,0.001])
-% xlabel('Frequency (Hz)')
-% ylabel('Amplitude (mV)')
-% title('Deltoides Anterior')
-% grid 
-% 
-% if (i ==1)
-%     title('Anterior Deltoid')
-% elseif (i==2)
-%     title('Medial Deltoid ')
-% elseif (i==3)
-%     title('Superior Trapezius')
-% elseif (i==4)
-%     title('Medial Trapezius')
-% elseif (i==5)
-%     title('Inferior Trapezius')
-% elseif (i==6)
-%     title('Anterior Serratus')
-% end
+subplot(3,2,i)
+plot(f, p)
+ylim([0,0.001])
+xlabel('Frequency (Hz)')
+ylabel('Amplitude (mV)')
+title('Deltoides Anterior')
+grid 
+
+if (i ==1)
+    title('Anterior Deltoid')
+elseif (i==2)
+    title('Medial Deltoid ')
+elseif (i==3)
+    title('Superior Trapezius')
+elseif (i==4)
+    title('Medial Trapezius')
+elseif (i==5)
+    title('Inferior Trapezius')
+elseif (i==6)
+    title('Anterior Serratus')
+end
 
 end
 
