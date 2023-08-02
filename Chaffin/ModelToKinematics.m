@@ -1,4 +1,6 @@
 % Created by E.Silva 19/05/23
+% Last modification: 02/08/23
+
 % Reference for model outputs
 % https://docs.vicon.com/display/Nexus213/Upper+body+angles+as+output+from+Plug-in+Gait
 % Calculate Amplitude, Duration, mean Velocity, mean Acceleration, Mean,
@@ -16,12 +18,12 @@ Wrist(Y)        = Extension (CW)
 clear ; clc;
 format short
 
-target = "S10"; %target subject (data)
+target = "S20"; %target subject (data)
 % Working directory between workstations
 if exist("C:/Users/Usuario/", 'dir')
-    destination = ["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataModel\", target, ".mat"]
+    destination = ["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataModel\", target, ".mat"];
 else
-    destination = ["C:/Users/VICON/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataModel\", target, ".mat"]
+    destination = ["C:/Users/VICON/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataModel\", target, ".mat"];
 end
 
 targetData = join(destination,"");
@@ -37,58 +39,58 @@ load(targetData);
 
 % read table from subject's data. 
 % store it in temp variable. 
-temp1 = table2array(C01_T1_Shoulder);
-temp2 = table2array(C02_T1_Shoulder);
-
-temp3 = table2array(C01_T2_Shoulder);
-temp4 = table2array(C02_T2_Shoulder);
-
-temp5 = table2array(C01_T3_Shoulder);
-temp6 = table2array(C02_T3_Shoulder);
-
-temp7 = table2array(C01_T4_Shoulder);
-temp8 = table2array(C02_T4_Shoulder);
-
-temp9 = table2array(C01_T5_Shoulder);
-temp10 = table2array(C02_T5_Shoulder);
-
-temp11 = table2array(C01_T6_Shoulder);
-temp12 = table2array(C02_T6_Shoulder);
+% C01_T1_Shoulder = table2array(C01_T1_Shoulder);
+% C02_T1_Shoulder = table2array(C02_T1_Shoulder);
+% 
+% C01_T2_Shoulder = table2array(C01_T2_Shoulder);
+% C02_T2_Shoulder = table2array(C02_T2_Shoulder);
+% 
+% C01_T3_Shoulder = table2array(C01_T3_Shoulder);
+% C02_T3_Shoulder = table2array(C02_T3_Shoulder);
+% 
+% C01_T4_Shoulder = table2array(C01_T4_Shoulder);
+% C02_T4_Shoulder = table2array(C02_T4_Shoulder);
+% 
+% C01_T5_Shoulder = table2array(C01_T5_Shoulder);
+% C02_T5_Shoulder = table2array(C02_T5_Shoulder);
+% 
+% C01_T6_Shoulder = table2array(C01_T6_Shoulder);
+% C02_T6_Shoulder = table2array(C02_T6_Shoulder);
 
 % Each dimension of the table represent an axis of movement, we are
 % interested in x axis (abduction) and y axis (flexion)
 % Data(x) = data(:,x,:) == data(:,1,:)
 % Data(y) = data(:,y,:) == data(:,2,:)
 
-shoulder1Abd1 = temp1(:,1,:);
-shoulder1Abd2 = temp2(:,1,:);
-shoulder1Flex1 = temp1(:,2,:);
-shoulder1Flex2 = temp2(:,2,:);
+shoulder1Abd1 = C01_T1_Shoulder(:,1,:);
+shoulder1Abd2 = C02_T1_Shoulder(:,1,:);
+shoulder1Flex1 = C01_T1_Shoulder(:,2,:);
+shoulder1Flex2 = C02_T1_Shoulder(:,2,:);
 
-shoulder2Abd1 = temp3(:,1,:);
-shoulder2Abd2 = temp4(:,1,:);
-shoulder2Flex1 = temp3(:,2,:);
-shoulder2Flex2 = temp4(:,2,:);
+shoulder2Abd1 = C01_T2_Shoulder(:,1,:);
+shoulder2Abd2 = C02_T2_Shoulder(:,1,:);
+shoulder2Flex1 = C01_T2_Shoulder(:,2,:);
+shoulder2Flex2 = C02_T2_Shoulder(:,2,:);
 
-shoulder3Abd1 = temp5(:,1,:);
-shoulder3Abd2 = temp6(:,1,:);
-shoulder3Flex1 = temp5(:,2,:);
-shoulder3Flex2 = temp6(:,2,:);
+shoulder3Abd1 = C01_T3_Shoulder(:,1,:);
+shoulder3Abd2 = C02_T3_Shoulder(:,1,:);
+shoulder3Flex1 = C01_T3_Shoulder(:,2,:);
+shoulder3Flex2 = C02_T3_Shoulder(:,2,:);
 
-shoulder4Abd1 = temp7(:,1,:);
-shoulder4Abd2 = temp8(:,1,:);
-shoulder4Flex1 = temp7(:,2,:);
-shoulder4Flex2 = temp8(:,2,:);
+shoulder4Abd1 = C01_T4_Shoulder(:,1,:);
+shoulder4Abd2 = C02_T4_Shoulder(:,1,:);
+shoulder4Flex1 = C01_T4_Shoulder(:,2,:);
+shoulder4Flex2 = C02_T4_Shoulder(:,2,:);
 
-shoulder5Abd1 = temp9(:,1,:);
-shoulder5Abd2 = temp10(:,1,:);
-shoulder5Flex1 = temp9(:,2,:);
-shoulder5Flex2 = temp10(:,2,:);
+shoulder5Abd1 = C01_T5_Shoulder(:,1,:);
+shoulder5Abd2 = C02_T5_Shoulder(:,1,:);
+shoulder5Flex1 = C01_T5_Shoulder(:,2,:);
+shoulder5Flex2 = C02_T5_Shoulder(:,2,:);
 
-shoulder6Abd1 = temp11(:,1,:);
-shoulder6Abd2 = temp12(:,1,:);
-shoulder6Flex1 = temp11(:,2,:);
-shoulder6Flex2 = temp12(:,2,:);
+shoulder6Abd1 = C01_T6_Shoulder(:,1,:);
+shoulder6Abd2 = C02_T6_Shoulder(:,1,:);
+shoulder6Flex1 = C01_T6_Shoulder(:,2,:);
+shoulder6Flex2 = C02_T6_Shoulder(:,2,:);
 
 tasks = {
     shoulder1Abd1, shoulder2Abd1, shoulder3Abd1, shoulder4Abd1, shoulder5Abd1, shoulder6Abd1, ...
