@@ -12,9 +12,6 @@ if __name__ == '__main__':
         Path('C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/Escritorio/Data/DataEMG/'))
     textSeparator = ''
 
-    conditionOne = []
-    conditionTwo = []
-
     targetEMGOutput1 = "DeltoideAnterior"
     targetEMGOutput2 = "DeltoideMedio"
     targetEMGOutput3 = "TrapecioSuperior"
@@ -30,52 +27,58 @@ if __name__ == '__main__':
                  targetEMGOutput6]
     EmgMeasurements = [targetEMGMeasurement1, targetEMGMeasurement2, targetEMGMeasurement3]
 
-    targetModelOutput = targetEMGOutput1
-    targetModelMeasurement = targetEMGMeasurement3
+    for n_muscles, a in enumerate(EmgOutput):
+        for b in EmgMeasurements:
+            conditionOne = []
+            conditionTwo = []
 
-    for count, x in enumerate(os.walk(path)):
-        if count != 0 and count <= 20:
-            targetFolder = str(x[0].split('\\')[9])
-            targetFile = str(x[2][1])
-            newPath = ['C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/Escritorio/Data/DataEMG/',
-                       targetFolder, '/', targetFile]
-            dataFrame = pd.read_excel(textSeparator.join(newPath))
+            targetModelOutput = a
+            targetModelMeasurement = b
 
-            headers = dataFrame.columns.values
+            for count, x in enumerate(os.walk(path)):
+                if count != 0 and count <= 20:
+                    targetFolder = str(x[0].split('\\')[9])
+                    targetFile = str(x[2][1])
+                    newPath = ['C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/Escritorio/Data/DataEMG/',
+                               targetFolder, '/', targetFile]
 
-            start = 0
-            end = 1
-            header = headers[0]
-            C1 = []
-            C2 = []
+                    dataFrame = pd.read_excel(textSeparator.join(newPath))
 
-            if targetModelMeasurement == "%EMG":
-                header = headers[1]
-            elif targetModelMeasurement == "mVEMG":
-                header = headers[4]
-            elif targetModelMeasurement == "ON":
-                header = headers[5]
+                    headers = dataFrame.columns.values
 
-            for i in range(0, 31, 6):
-                temp1 = dataFrame[header][i]
-                C1.append(temp1)
-            conditionOne.append(C1)
+                    header = headers[0]
+                    start = [0 + n_muscles, 36 + n_muscles]
+                    end = [31 + n_muscles, 67 + n_muscles]
+                    C1 = []
+                    C2 = []
 
-            for i in range(36, 67, 6):
-                temp2 = dataFrame[header][i]
-                C2.append(temp2)
-            conditionTwo.append(C2)
+                    if targetModelMeasurement == "%EMG":
+                        header = headers[1]
+                    elif targetModelMeasurement == "mVEMG":
+                        header = headers[4]
+                    elif targetModelMeasurement == "ON":
+                        header = headers[5]
 
-    # print(conditionOne)
-    # print(conditionTwo)
-    dfOne = pd.DataFrame(conditionOne)
-    dfOne = dfOne.transpose()
-    dfTwo = pd.DataFrame(conditionTwo)
-    dfTwo = dfTwo.transpose()
+                    for i in range(start[0], end[0], 6):
+                        temp1 = dataFrame[header][i]
+                        C1.append(temp1)
+                    conditionOne.append(C1)
 
-    outputFile = targetModelOutput + targetModelMeasurement + '.xlsx'
-    print(outputFile)
+                    for i in range(start[1], end[1], 6):
+                        temp2 = dataFrame[header][i]
+                        C2.append(temp2)
+                    conditionTwo.append(C2)
 
-    with pd.ExcelWriter(outputFile) as writer:
-        dfOne.to_excel(writer, sheet_name='Condition1', index=False, header=False)
-        dfTwo.to_excel(writer, sheet_name='Condition2', index=False, header=False)
+            # print(conditionOne)
+            # print(conditionTwo)
+            dfOne = pd.DataFrame(conditionOne)
+            dfOne = dfOne.transpose()
+            dfTwo = pd.DataFrame(conditionTwo)
+            dfTwo = dfTwo.transpose()
+
+            outputFile = targetModelOutput + targetModelMeasurement + '.xlsx'
+            print(outputFile)
+
+            with pd.ExcelWriter(outputFile) as writer:
+                dfOne.to_excel(writer, sheet_name='Condition1', index=False, header=False)
+                dfTwo.to_excel(writer, sheet_name='Condition2', index=False, header=False)

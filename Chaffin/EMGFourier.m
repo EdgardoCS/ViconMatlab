@@ -7,7 +7,8 @@ load('C:\Users\Usuario\Documents\GitHub\ViconMatlab\Chaffin\DataEMG\001\taskData
 muscles = [C01_T1_deltAnt, C01_T1_deltMed, C01_T1_trapSup, C01_T1_trapMed, C01_T1_trapInf, C01_T1_serrAnt];
 
 %%
-for i = 1:length(muscles(1,:))
+%for i = 1:length(muscles(1,:))
+for i = 1:2
 
 targetData = muscles(:,i)*1000; % to mV
 
@@ -18,10 +19,12 @@ f = fs*(0:(L/2))/L;
 p = fft(targetData);
 p = abs(p/L);
 
+fig = gcf;
+
 p = p(1:L/2+1); 
 p(2:end-1) = 2*p(2:end-1);
 
-subplot(3,2,i)
+subplot(1,2,i)
 plot(f, p)
 ylim([0,0.001])
 xlabel('Frequency (Hz)')
@@ -30,9 +33,9 @@ title('Deltoides Anterior')
 grid 
 
 if (i ==1)
-    title('Anterior Deltoid')
+    title('Lower Trapezius')
 elseif (i==2)
-    title('Medial Deltoid ')
+    title('Serratus Anterior')
 elseif (i==3)
     title('Superior Trapezius')
 elseif (i==4)
@@ -42,6 +45,8 @@ elseif (i==5)
 elseif (i==6)
     title('Anterior Serratus')
 end
+
+exportgraphics(fig,'Lamina.png','Resolution',300)
 
 end
 
