@@ -18,12 +18,12 @@ Wrist(Y)        = Extension (CW)
 clear ; clc;
 format short
 
-target = "S20"; %target subject (data)
+target = "S18"; %target subject (data)
 % Working directory between workstations
 if exist("C:/Users/Usuario/", 'dir')
-    destination = ["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataModel\", target, ".mat"];
+    destination = ["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\DataModel\", target, ".mat"];
 else
-    destination = ["C:/Users/VICON/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataModel\", target, ".mat"];
+    destination = ["C:/Users/VICON/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\DataModel\", target, ".mat"];
 end
 
 targetData = join(destination,"");

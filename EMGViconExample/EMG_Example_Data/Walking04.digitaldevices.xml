@@ -1,0 +1,506 @@
+<DigitalDevices>
+	<DeviceDefinition manufacturer="AMTI" type="464508" version="V1.00" description="This device represents an AMTI force plate/signal conditioner pair" standard-device-category="ForcePlate">
+		<SyncInput name="Sync Port"/>
+		<Parameter name="Connected" display-name="Connected" description="Indicates whether the device is connected" group="Status" persistent="false" change-group-key="0">
+			<InitialValue type="Bool" read-only="true" advanced="true" value="false"/>
+		</Parameter>
+		<Parameter name="StandardDimension_X" display-name="X" description="Length of force plate in the X Axis (meters)" group="Dimensions" persistent="true" change-group-key="6">
+			<InitialValue type="Double" read-only="true" advanced="true" value="0.46400000000000002"/>
+		</Parameter>
+		<Parameter name="StandardDimension_Y" display-name="Y" description="Length of force plate in the Y Axis (meters)" group="Dimensions" persistent="true" change-group-key="0">
+			<InitialValue type="Double" read-only="true" advanced="true" value="0.50800000000000001"/>
+		</Parameter>
+		<Parameter name="ParameterA" display-name="a" description="X displacement from sensor origin to force plate origin." group="Origin" persistent="true" change-group-key="6">
+			<InitialValue type="Double" read-only="true" advanced="true" value="0"/>
+		</Parameter>
+		<Parameter name="ParameterB" display-name="b" description="Y displacement from sensor origin to force plate origin." group="Origin" persistent="true" change-group-key="6">
+			<InitialValue type="Double" read-only="true" advanced="true" value="0"/>
+		</Parameter>
+		<Parameter name="ParameterAZ0" display-name="az0" description="Negative Z displacement from sensor origin to force plate surface." group="Origin" persistent="true" change-group-key="6">
+			<InitialValue type="Double" read-only="true" advanced="true" value="0"/>
+		</Parameter>
+		<Parameter name="AmplifierModel" display-name="Amplifier Model" description="Amplifier Model" group="Amplifier" persistent="true" change-group-key="1">
+			<InitialValue type="String" read-only="true" advanced="true" value=""/>
+		</Parameter>
+		<Parameter name="AmplifierSerial" display-name="Amplifier Serial" description="Amplifier Serial" group="Amplifier" persistent="true" change-group-key="2">
+			<InitialValue type="String" read-only="true" advanced="true" value=""/>
+		</Parameter>
+		<Parameter name="PlatformModel" display-name="Platform Model" description="Platform Model" group="Platform" persistent="true" change-group-key="3">
+			<InitialValue type="String" read-only="true" advanced="true" value=""/>
+		</Parameter>
+		<Parameter name="PlatformSerial" display-name="Platform Serial" description="Platform Serial" group="Platform" persistent="true" change-group-key="4">
+			<InitialValue type="String" read-only="true" advanced="true" value=""/>
+		</Parameter>
+		<Parameter name="FirmwareVersion" display-name="Firmware Version" description="Firmware Version" group="Amplifier" persistent="true" change-group-key="0">
+			<InitialValue type="String" read-only="true" advanced="true" value=""/>
+		</Parameter>
+		<Parameter name="BlinkAction" display-name="Blink" description="Make the selected signal conditioner blink. The amber light will blink for ten seconds. " group="Amplifier" persistent="true" change-group-key="5">
+			<InitialValue type="Action" value="0"/>
+		</Parameter>
+		<Output name="Force" quantity="Force">
+			<Component name="Fx"/>
+			<Component name="Fy"/>
+			<Component name="Fz"/>
+		</Output>
+		<Output name="Moment" quantity="Moment">
+			<Component name="Mx"/>
+			<Component name="My"/>
+			<Component name="Mz"/>
+		</Output>
+		<Output name="CoP" quantity="Length">
+			<Component name="Cx"/>
+			<Component name="Cy"/>
+			<Component name="Cz"/>
+		</Output>
+	</DeviceDefinition>
+	<DeviceDefinition manufacturer="AMTI" type="Digital device common settings" version="V1.10" description="This is a placeholder device controlling settings       common to all AMTI devices" manual-instantiation-text="Add AMTI Gen5/Optima devices" standard-device-category="Shared Configuration">
+		<Parameter name="SampleRate" display-name="Acquisition rate" description="Broadcasts an acquisition rate, in datasets per second, to all connected signal conditioners." group="Device collection" persistent="true" change-group-key="4">
+			<InitialValue type="Enum" value="1000">
+				<Enumeration value="2000"/>
+				<Enumeration value="1800"/>
+				<Enumeration value="1500"/>
+				<Enumeration value="1200"/>
+				<Enumeration value="1000"/>
+				<Enumeration value="900"/>
+				<Enumeration value="800"/>
+				<Enumeration value="600"/>
+				<Enumeration value="500"/>
+				<Enumeration value="450"/>
+				<Enumeration value="400"/>
+				<Enumeration value="360"/>
+				<Enumeration value="300"/>
+				<Enumeration value="250"/>
+				<Enumeration value="240"/>
+				<Enumeration value="225"/>
+				<Enumeration value="200"/>
+				<Enumeration value="180"/>
+				<Enumeration value="150"/>
+				<Enumeration value="125"/>
+				<Enumeration value="120"/>
+				<Enumeration value="100"/>
+				<Enumeration value="90"/>
+				<Enumeration value="80"/>
+				<Enumeration value="75"/>
+				<Enumeration value="60"/>
+				<Enumeration value="50"/>
+				<Enumeration value="45"/>
+				<Enumeration value="40"/>
+				<Enumeration value="30"/>
+				<Enumeration value="25"/>
+				<Enumeration value="20"/>
+				<Enumeration value="15"/>
+				<Enumeration value="10"/>
+			</InitialValue>
+		</Parameter>
+		<Parameter name="SyncMode" display-name="Synchronization mode" description="Synchronization mode" group="Device collection" persistent="true" change-group-key="3">
+			<InitialValue type="Enum" value="Software trigger">
+				<Enumeration value="Software trigger"/>
+				<Enumeration value="Hardware trigger"/>
+			</InitialValue>
+		</Parameter>
+		<Parameter name="DataThreshold" display-name="Fz Threshold" description="Fz limit below which data are not collected." group="Device collection" persistent="true" change-group-key="5">
+			<InitialValue type="Double" value="20" min-value="0" max-value="50" slider-mode="true"/>
+		</Parameter>
+		<Parameter name="BroadcastZero" display-name="Zero digital platforms" description="Send a 'Zero' command to all of the signal conditioners. Calling this function doesn't interrupt data acquisition." group="Actions" persistent="true" change-group-key="2">
+			<InitialValue type="Action" value="0"/>
+		</Parameter>
+		<Parameter name="BroadcastResetUSB" display-name="Reset USB" description="This function resets the USB pipes from the PC to the signal conditioner for all connect signal conditioners.     Its only current use is resetting the data collection after a two second  data collection pause caused by an extended Genlock timeout." group="Device collection" persistent="true" change-group-key="0">
+			<InitialValue type="Action" hidden="true" value="0"/>
+		</Parameter>
+		<Parameter name="ScanForHardware" display-name="Detect AMTI digital devices" description="Search for additional signal conditioners" group="Plug-in" persistent="true" change-group-key="1">
+			<InitialValue type="Action" value="0"/>
+		</Parameter>
+	</DeviceDefinition>
+	<DeviceDefinition manufacturer="Delsys" type="Trigno Accelerometers" version="2.0" description="The Accelerometer channels of a Trigno system" standard-device-category="Accelerometer" composite-device-type="Delsys Trigno System">
+		<Parameter name="ServerAddress" display-name="Trigno Server Address" description="The IP address or hostname of the machine hosting the Trigno server." group="Server" persistent="true" change-group-key="0">
+			<InitialValue type="String" value="localhost"/>
+		</Parameter>
+		<Parameter name="Connected" display-name="Connected" description="Indicates whether the device is connected" group="Status" persistent="false" change-group-key="0">
+			<InitialValue type="Bool" read-only="true" advanced="true" value="false"/>
+		</Parameter>
+		<Output name="Sensor 1" quantity="Acceleration">
+			<Component name="ACCX1"/>
+			<Component name="ACCY1"/>
+			<Component name="ACCZ1"/>
+		</Output>
+		<Output name="Sensor 2" quantity="Acceleration">
+			<Component name="ACCX2"/>
+			<Component name="ACCY2"/>
+			<Component name="ACCZ2"/>
+		</Output>
+		<Output name="Sensor 3" quantity="Acceleration">
+			<Component name="ACCX3"/>
+			<Component name="ACCY3"/>
+			<Component name="ACCZ3"/>
+		</Output>
+		<Output name="Sensor 4" quantity="Acceleration">
+			<Component name="ACCX4"/>
+			<Component name="ACCY4"/>
+			<Component name="ACCZ4"/>
+		</Output>
+		<Output name="Sensor 5" quantity="Acceleration">
+			<Component name="ACCX5"/>
+			<Component name="ACCY5"/>
+			<Component name="ACCZ5"/>
+		</Output>
+		<Output name="Sensor 6" quantity="Acceleration">
+			<Component name="ACCX6"/>
+			<Component name="ACCY6"/>
+			<Component name="ACCZ6"/>
+		</Output>
+		<Output name="Sensor 7" quantity="Acceleration">
+			<Component name="ACCX7"/>
+			<Component name="ACCY7"/>
+			<Component name="ACCZ7"/>
+		</Output>
+		<Output name="Sensor 8" quantity="Acceleration">
+			<Component name="ACCX8"/>
+			<Component name="ACCY8"/>
+			<Component name="ACCZ8"/>
+		</Output>
+		<Output name="Sensor 9" quantity="Acceleration">
+			<Component name="ACCX9"/>
+			<Component name="ACCY9"/>
+			<Component name="ACCZ9"/>
+		</Output>
+		<Output name="Sensor 10" quantity="Acceleration">
+			<Component name="ACCX10"/>
+			<Component name="ACCY10"/>
+			<Component name="ACCZ10"/>
+		</Output>
+		<Output name="Sensor 11" quantity="Acceleration">
+			<Component name="ACCX11"/>
+			<Component name="ACCY11"/>
+			<Component name="ACCZ11"/>
+		</Output>
+		<Output name="Sensor 12" quantity="Acceleration">
+			<Component name="ACCX12"/>
+			<Component name="ACCY12"/>
+			<Component name="ACCZ12"/>
+		</Output>
+		<Output name="Sensor 13" quantity="Acceleration">
+			<Component name="ACCX13"/>
+			<Component name="ACCY13"/>
+			<Component name="ACCZ13"/>
+		</Output>
+		<Output name="Sensor 14" quantity="Acceleration">
+			<Component name="ACCX14"/>
+			<Component name="ACCY14"/>
+			<Component name="ACCZ14"/>
+		</Output>
+		<Output name="Sensor 15" quantity="Acceleration">
+			<Component name="ACCX15"/>
+			<Component name="ACCY15"/>
+			<Component name="ACCZ15"/>
+		</Output>
+		<Output name="Sensor 16" quantity="Acceleration">
+			<Component name="ACCX16"/>
+			<Component name="ACCY16"/>
+			<Component name="ACCZ16"/>
+		</Output>
+	</DeviceDefinition>
+	<DeviceDefinition manufacturer="Delsys" type="Trigno EMG" version="2.0" description="The EMG channels of a Trigno system" manual-instantiation-text="Add Delsys Trigno System" standard-device-category="EMG" composite-device-type="Delsys Trigno System">
+		<SyncInput name="Start"/>
+		<Parameter name="ServerAddress" display-name="Trigno Server Address" description="The IP address or hostname of the machine hosting the Trigno server." group="Server" persistent="true" change-group-key="0">
+			<InitialValue type="String" value="localhost"/>
+		</Parameter>
+		<Parameter name="Connected" display-name="Connected" description="Indicates whether the device is connected" group="Status" persistent="false" change-group-key="0">
+			<InitialValue type="Bool" read-only="true" advanced="true" value="false"/>
+		</Parameter>
+		<Parameter name="ServerBasePort" display-name="Trigno Server Port" description="The port on which to connect to the Trigno server's control stream." group="Server" persistent="true" change-group-key="0">
+			<InitialValue type="Int" value="50040" min-value="1024" max-value="65535"/>
+		</Parameter>
+		<Parameter name="TriggerMode" display-name="Trigger Mode" description="Specify if the Trigno system will be started with a hardware trigger." group="Synchronisation" persistent="true" change-group-key="0">
+			<InitialValue type="Enum" value="Not Triggered">
+				<Enumeration value="Not Triggered"/>
+				<Enumeration value="Triggered"/>
+			</InitialValue>
+		</Parameter>
+		<Output name="Sensor 1" quantity="ElectricPotential">
+			<Component name="EMG1"/>
+		</Output>
+		<Output name="Sensor 2" quantity="ElectricPotential">
+			<Component name="EMG2"/>
+		</Output>
+		<Output name="Sensor 3" quantity="ElectricPotential">
+			<Component name="EMG3"/>
+		</Output>
+		<Output name="Sensor 4" quantity="ElectricPotential">
+			<Component name="EMG4"/>
+		</Output>
+		<Output name="Sensor 5" quantity="ElectricPotential">
+			<Component name="EMG5"/>
+		</Output>
+		<Output name="Sensor 6" quantity="ElectricPotential">
+			<Component name="EMG6"/>
+		</Output>
+		<Output name="Sensor 7" quantity="ElectricPotential">
+			<Component name="EMG7"/>
+		</Output>
+		<Output name="Sensor 8" quantity="ElectricPotential">
+			<Component name="EMG8"/>
+		</Output>
+		<Output name="Sensor 9" quantity="ElectricPotential">
+			<Component name="EMG9"/>
+		</Output>
+		<Output name="Sensor 10" quantity="ElectricPotential">
+			<Component name="EMG10"/>
+		</Output>
+		<Output name="Sensor 11" quantity="ElectricPotential">
+			<Component name="EMG11"/>
+		</Output>
+		<Output name="Sensor 12" quantity="ElectricPotential">
+			<Component name="EMG12"/>
+		</Output>
+		<Output name="Sensor 13" quantity="ElectricPotential">
+			<Component name="EMG13"/>
+		</Output>
+		<Output name="Sensor 14" quantity="ElectricPotential">
+			<Component name="EMG14"/>
+		</Output>
+		<Output name="Sensor 15" quantity="ElectricPotential">
+			<Component name="EMG15"/>
+		</Output>
+		<Output name="Sensor 16" quantity="ElectricPotential">
+			<Component name="EMG16"/>
+		</Output>
+	</DeviceDefinition>
+	<DeviceDefinition manufacturer="Delsys" type="Trigno IMU AUX" version="2.0" description="The IM AUX channels of a Trigno system" standard-device-category="IM AUX" composite-device-type="Delsys Trigno System">
+		<Parameter name="Connected" display-name="Connected" description="Indicates whether the device is connected" group="Status" persistent="false" change-group-key="0">
+			<InitialValue type="Bool" read-only="true" advanced="true" value="false"/>
+		</Parameter>
+		<Output name="Sensor 1" quantity="Acceleration">
+			<Component name="ACCX1"/>
+			<Component name="ACCY1"/>
+			<Component name="ACCZ1"/>
+			<Component name="GYROX1"/>
+			<Component name="GYROY1"/>
+			<Component name="GYROZ1"/>
+			<Component name="MAGX1"/>
+			<Component name="MAGY1"/>
+			<Component name="MAGZ1"/>
+		</Output>
+		<Output name="Sensor 2" quantity="Acceleration">
+			<Component name="ACCX2"/>
+			<Component name="ACCY2"/>
+			<Component name="ACCZ2"/>
+			<Component name="GYROX2"/>
+			<Component name="GYROY2"/>
+			<Component name="GYROZ2"/>
+			<Component name="MAGX2"/>
+			<Component name="MAGY2"/>
+			<Component name="MAGZ2"/>
+		</Output>
+		<Output name="Sensor 3" quantity="Acceleration">
+			<Component name="ACCX3"/>
+			<Component name="ACCY3"/>
+			<Component name="ACCZ3"/>
+			<Component name="GYROX3"/>
+			<Component name="GYROY3"/>
+			<Component name="GYROZ3"/>
+			<Component name="MAGX3"/>
+			<Component name="MAGY3"/>
+			<Component name="MAGZ3"/>
+		</Output>
+		<Output name="Sensor 4" quantity="Acceleration">
+			<Component name="ACCX4"/>
+			<Component name="ACCY4"/>
+			<Component name="ACCZ4"/>
+			<Component name="GYROX4"/>
+			<Component name="GYROY4"/>
+			<Component name="GYROZ4"/>
+			<Component name="MAGX4"/>
+			<Component name="MAGY4"/>
+			<Component name="MAGZ4"/>
+		</Output>
+		<Output name="Sensor 5" quantity="Acceleration">
+			<Component name="ACCX5"/>
+			<Component name="ACCY5"/>
+			<Component name="ACCZ5"/>
+			<Component name="GYROX5"/>
+			<Component name="GYROY5"/>
+			<Component name="GYROZ5"/>
+			<Component name="MAGX5"/>
+			<Component name="MAGY5"/>
+			<Component name="MAGZ5"/>
+		</Output>
+		<Output name="Sensor 6" quantity="Acceleration">
+			<Component name="ACCX6"/>
+			<Component name="ACCY6"/>
+			<Component name="ACCZ6"/>
+			<Component name="GYROX6"/>
+			<Component name="GYROY6"/>
+			<Component name="GYROZ6"/>
+			<Component name="MAGX6"/>
+			<Component name="MAGY6"/>
+			<Component name="MAGZ6"/>
+		</Output>
+		<Output name="Sensor 7" quantity="Acceleration">
+			<Component name="ACCX7"/>
+			<Component name="ACCY7"/>
+			<Component name="ACCZ7"/>
+			<Component name="GYROX7"/>
+			<Component name="GYROY7"/>
+			<Component name="GYROZ7"/>
+			<Component name="MAGX7"/>
+			<Component name="MAGY7"/>
+			<Component name="MAGZ7"/>
+		</Output>
+		<Output name="Sensor 8" quantity="Acceleration">
+			<Component name="ACCX8"/>
+			<Component name="ACCY8"/>
+			<Component name="ACCZ8"/>
+			<Component name="GYROX8"/>
+			<Component name="GYROY8"/>
+			<Component name="GYROZ8"/>
+			<Component name="MAGX8"/>
+			<Component name="MAGY8"/>
+			<Component name="MAGZ8"/>
+		</Output>
+		<Output name="Sensor 9" quantity="Acceleration">
+			<Component name="ACCX9"/>
+			<Component name="ACCY9"/>
+			<Component name="ACCZ9"/>
+			<Component name="GYROX9"/>
+			<Component name="GYROY9"/>
+			<Component name="GYROZ9"/>
+			<Component name="MAGX9"/>
+			<Component name="MAGY9"/>
+			<Component name="MAGZ9"/>
+		</Output>
+		<Output name="Sensor 10" quantity="Acceleration">
+			<Component name="ACCX10"/>
+			<Component name="ACCY10"/>
+			<Component name="ACCZ10"/>
+			<Component name="GYROX10"/>
+			<Component name="GYROY10"/>
+			<Component name="GYROZ10"/>
+			<Component name="MAGX10"/>
+			<Component name="MAGY10"/>
+			<Component name="MAGZ10"/>
+		</Output>
+		<Output name="Sensor 11" quantity="Acceleration">
+			<Component name="ACCX11"/>
+			<Component name="ACCY11"/>
+			<Component name="ACCZ11"/>
+			<Component name="GYROX11"/>
+			<Component name="GYROY11"/>
+			<Component name="GYROZ11"/>
+			<Component name="MAGX11"/>
+			<Component name="MAGY11"/>
+			<Component name="MAGZ11"/>
+		</Output>
+		<Output name="Sensor 12" quantity="Acceleration">
+			<Component name="ACCX12"/>
+			<Component name="ACCY12"/>
+			<Component name="ACCZ12"/>
+			<Component name="GYROX12"/>
+			<Component name="GYROY12"/>
+			<Component name="GYROZ12"/>
+			<Component name="MAGX12"/>
+			<Component name="MAGY12"/>
+			<Component name="MAGZ12"/>
+		</Output>
+		<Output name="Sensor 13" quantity="Acceleration">
+			<Component name="ACCX13"/>
+			<Component name="ACCY13"/>
+			<Component name="ACCZ13"/>
+			<Component name="GYROX13"/>
+			<Component name="GYROY13"/>
+			<Component name="GYROZ13"/>
+			<Component name="MAGX13"/>
+			<Component name="MAGY13"/>
+			<Component name="MAGZ13"/>
+		</Output>
+		<Output name="Sensor 14" quantity="Acceleration">
+			<Component name="ACCX14"/>
+			<Component name="ACCY14"/>
+			<Component name="ACCZ14"/>
+			<Component name="GYROX14"/>
+			<Component name="GYROY14"/>
+			<Component name="GYROZ14"/>
+			<Component name="MAGX14"/>
+			<Component name="MAGY14"/>
+			<Component name="MAGZ14"/>
+		</Output>
+		<Output name="Sensor 15" quantity="Acceleration">
+			<Component name="ACCX15"/>
+			<Component name="ACCY15"/>
+			<Component name="ACCZ15"/>
+			<Component name="GYROX15"/>
+			<Component name="GYROY15"/>
+			<Component name="GYROZ15"/>
+			<Component name="MAGX15"/>
+			<Component name="MAGY15"/>
+			<Component name="MAGZ15"/>
+		</Output>
+		<Output name="Sensor 16" quantity="Acceleration">
+			<Component name="ACCX16"/>
+			<Component name="ACCY16"/>
+			<Component name="ACCZ16"/>
+			<Component name="GYROX16"/>
+			<Component name="GYROY16"/>
+			<Component name="GYROZ16"/>
+			<Component name="MAGX16"/>
+			<Component name="MAGY16"/>
+			<Component name="MAGZ16"/>
+		</Output>
+	</DeviceDefinition>
+	<DeviceDefinition manufacturer="Delsys" type="Trigno IMU EMG" version="2.0" description="The Im EMG channels of a Trigno system" standard-device-category="IM EMG" composite-device-type="Delsys Trigno System">
+		<Parameter name="ServerAddress" display-name="Trigno Server Address" description="The IP address or hostname of the machine hosting the Trigno server." group="Server" persistent="true" change-group-key="0">
+			<InitialValue type="String" value="localhost"/>
+		</Parameter>
+		<Parameter name="Connected" display-name="Connected" description="Indicates whether the device is connected" group="Status" persistent="false" change-group-key="0">
+			<InitialValue type="Bool" read-only="true" advanced="true" value="false"/>
+		</Parameter>
+		<Output name="Sensor 1" quantity="ElectricPotential">
+			<Component name="IM EMG1"/>
+		</Output>
+		<Output name="Sensor 2" quantity="ElectricPotential">
+			<Component name="IM EMG2"/>
+		</Output>
+		<Output name="Sensor 3" quantity="ElectricPotential">
+			<Component name="IM EMG3"/>
+		</Output>
+		<Output name="Sensor 4" quantity="ElectricPotential">
+			<Component name="IM EMG4"/>
+		</Output>
+		<Output name="Sensor 5" quantity="ElectricPotential">
+			<Component name="IM EMG5"/>
+		</Output>
+		<Output name="Sensor 6" quantity="ElectricPotential">
+			<Component name="IM EMG6"/>
+		</Output>
+		<Output name="Sensor 7" quantity="ElectricPotential">
+			<Component name="IM EMG7"/>
+		</Output>
+		<Output name="Sensor 8" quantity="ElectricPotential">
+			<Component name="IM EMG8"/>
+		</Output>
+		<Output name="Sensor 9" quantity="ElectricPotential">
+			<Component name="IM EMG9"/>
+		</Output>
+		<Output name="Sensor 10" quantity="ElectricPotential">
+			<Component name="IM EMG10"/>
+		</Output>
+		<Output name="Sensor 11" quantity="ElectricPotential">
+			<Component name="IM EMG11"/>
+		</Output>
+		<Output name="Sensor 12" quantity="ElectricPotential">
+			<Component name="IM EMG12"/>
+		</Output>
+		<Output name="Sensor 13" quantity="ElectricPotential">
+			<Component name="IM EMG13"/>
+		</Output>
+		<Output name="Sensor 14" quantity="ElectricPotential">
+			<Component name="IM EMG14"/>
+		</Output>
+		<Output name="Sensor 15" quantity="ElectricPotential">
+			<Component name="IM EMG15"/>
+		</Output>
+		<Output name="Sensor 16" quantity="ElectricPotential">
+			<Component name="IM EMG16"/>
+		</Output>
+	</DeviceDefinition>
+</DigitalDevices>
+

@@ -8,7 +8,7 @@ muscles = [C01_T1_deltAnt, C01_T1_deltMed, C01_T1_trapSup, C01_T1_trapMed, C01_T
 
 %%
 %for i = 1:length(muscles(1,:))
-for i = 1:2
+for i = 1:length(muscles(1,:))
 
 targetData = muscles(:,i)*1000; % to mV
 
@@ -24,7 +24,7 @@ fig = gcf;
 p = p(1:L/2+1); 
 p(2:end-1) = 2*p(2:end-1);
 
-subplot(1,2,i)
+subplot(3,2,i)
 plot(f, p)
 ylim([0,0.001])
 xlabel('Frequency (Hz)')

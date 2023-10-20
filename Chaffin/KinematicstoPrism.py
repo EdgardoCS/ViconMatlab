@@ -8,7 +8,7 @@ if __name__ == '__main__':
     counter = 0
 
     path = os.path.join(
-        Path('C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/Escritorio/Data/DataModel/*xlsx'))
+        Path('C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/Pregrado_Kine_Escritorio/Data/DataModel/*xlsx'))
 
     files = glob.glob(path)
 
@@ -23,8 +23,8 @@ if __name__ == '__main__':
     targetModelMeasurement3 = "Vel_mean"
     targetModelMeasurement4 = "Mean"
 
-    targetModelOutput = targetModelOutput1
-    targetModelMeasurement = targetModelMeasurement2
+    targetModelOutput = targetModelOutput2
+    targetModelMeasurement = targetModelMeasurement4
 
     for f in files:
 

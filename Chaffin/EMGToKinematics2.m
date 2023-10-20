@@ -2,12 +2,43 @@
 
 clear; clc;
 
-t = ["001", "002", "003", "004", "005", "006", ...
-    "007", "008", "009", "010", "011", "012", ...
-    "013", "014", "015", "016", "017", "018", ...
-    "019", "020"];
 
-
+t = [
+    "001"
+    "002"
+    "003"
+    "004"
+    "005"
+    "006"
+    "007"
+    "008"
+    "009"
+    "010"
+    "011"
+    "012"
+    "013"
+    "014"
+    "015"
+    "016"
+    "017"
+    "018"
+    "019"
+    "020"
+    "021"
+    "022"
+    "023"
+    "024"
+    "025"
+    "026"
+    "027"
+    "028"
+    "029"
+    "030"
+    "031"
+    "032"
+    "033"
+    "034"
+    ];
 
 
 targetMuscles = ["deltAnt" "deltMed" "serrAnt" "trapInf" "trapMed" "trapSup"];
@@ -17,12 +48,12 @@ targetCondition = ["C01" "C02"];
 for m=1:length(t)
 
     if exist("C:/Users/Usuario/", 'dir')
-        destination = ["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataEMG\", t(m),"\"];
+        destination = ["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\DataEMG\", t(m),"\"];
     else
-        destination = ["C:/Users/VICON/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\DataEMG\", t(m),"\"];
+        destination = ["C:/Users/VICON/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\DataEMG\", t(m),"\"];
     end
 
-    targetData = join([destination, t(m),".mat"],"");
+    targetData = join([destination, t(m),".mat"],"")
     load(targetData);
 
     tableData = [];
@@ -39,9 +70,12 @@ for m=1:length(t)
                 % onEMGTime(k,j,i);
                 % offEMGTime(k,j,i);
 
-                tableData(x,:)= [meanEMGPercentage(k,j,i), maxEMGPercentage(k,j,i), ...
-                    minEMGPercentage(k,j,i), meanEMG(k,j,i), ...
-                    onEMGTime(k,j,i) ,offEMGTime(k,j,i)];
+                tableData(x,:) = [
+                    meanEMGPercentage(k,j,i), maxEMGPercentage(k,j,i), ...
+                    minEMGPercentage(k,j,i), lowOnTime(k,j,i), ...
+                    moderateOnTime(k,j,i) , highOnTime(k,j,i), ...
+                    veryHighOnTime(k,j,i), offTime(k,j,i),...
+                    totalTime(k,j,i)];
 
             end
         end
@@ -122,14 +156,15 @@ for m=1:length(t)
         'SerratoAnterior_Manipulate2'
         };
 
-    Columns = {'meanEMGPercentage'; 'maxEMGPercentage'; 'minEMGPercentage'; 'meanEMGActivity(mV)'; 'muscleOnTime(s)'; 'muscleOffTime(s)'};
+    Columns = {'meanEMGPercentage(%iMVC)'; 'maxEMGPercentage(%iMVC)'; 'minEMGPercentage(%iMVC)'; 'lowOnTime(s)'; 'moderateOnTime(s)'; 'highOnTime(s)'; 'veryHighOnTime(s)'; 'offTime(s)'; 'totalTime(s)'};
 
     modelOutput = table(tableData(:,1),tableData(:,2),tableData(:,3), ...
-        tableData(:,4),tableData(:,5),tableData(:,6),...
+        tableData(:,4),tableData(:,5),tableData(:,6),tableData(:,7), ...
+        tableData(:,8), tableData(:,9), ...
         'RowNames',Rows, 'VariableNames',Columns);
 
     % Save to .xlsx
-    filename = join([pwd,"/dataEMG/",t(m),"/", t(m),".xlsx"],"");
+    filename = join(["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\DataEMG\",t(m),"/", t(m),".xlsx"],"")
     writetable(modelOutput,filename,"WriteRowNames",true)
 
 end

@@ -16,27 +16,56 @@ Wrist(Y)        = Extension (CW)
 clear ; clc;
 format short
 
- t = ["001", "002", "003", "004", "005", "006", ...
-      "007", "008", "009", "010", "011", "012", ...
-      "013", "014", "015", "016", "017", "018", ...
-      "019", "020"];
+t = [
+    "001"
+    "002"
+    "003"
+    "004"
+    "005"
+    "006"
+    "007"
+    "008"
+    "009"
+    "010"
+    "011"
+    "012"
+    "013"
+    "014"
+    "015"
+    "016"
+    "017"
+    "018"
+    "019"
+    "020"
+    "021"
+    "022"
+    "023"
+    "024"
+    "025"
+    "026"
+    "027"
+    "028"
+    "029"
+    "030"
+    "031"
+    "032"
+    "033"
+    "034"
+    ];
 
 
-
-
-
-%targetMuscles = ["deltAnt" "deltMed" "serrAnt" "trapInf" "trapMed" "trapSup"];
-%targetTask = ["T1" "T2" "T3" "T4" "T5" "T6"];
-%targetCondition = ["C01" "C02"];
+% targetMuscles = "serrAnt";
+% targetTask = "T6";
+% targetCondition = "C02";
 
 targetMuscles = ["deltAnt" "deltMed" "serrAnt" "trapInf" "trapMed" "trapSup"];
 targetTask = ["T1" "T2" "T3" "T4" "T5" "T6"];
 targetCondition = ["C01" "C02"];
 
 for m=1:length(t)
-    target = t(m)
+    target = t(m);
 
-    destinationTask = join([pwd,'/DataEMG/', target, "/taskData.mat"],"");
+    destinationTask = join([pwd,'/DataEMG/', target, "/taskData.mat"],"")
 
     currentFolder = pwd;
 
@@ -45,37 +74,55 @@ for m=1:length(t)
     for i= 1:length(targetCondition)
         for j= 1:length(targetTask)
             for k=1:length(targetMuscles)
-                disp(join(['Working on ',targetCondition(i),"_",targetTask(j),"_",targetMuscles(k)], ""))
+                % disp(join(['Working on ',targetCondition(i),"_",targetTask(j),"_",targetMuscles(k)], ""))
                 [rmsv, norm] = normalizedEMG(targetMuscles, targetTask, targetCondition,destinationTask, target, i,j,k);
 
                 % lets calculate a simplified version of the muscle performance (%)
+
                 tempMinEMG= min(norm);
                 tempMaxEMG = max(norm);
                 minEMGPercentage(k,j,i) = tempMinEMG;
                 maxEMGPercentage(k,j,i) = tempMaxEMG;
                 meanEMGPercentage(k,j,i) = abs(tempMinEMG-tempMaxEMG);
 
+
                 % find ON/OFF
                 temp = [];
                 tempMeanMuscleActivity = [];
-                threshold=(rms(rmsv))+zeros(length(rmsv),1);
-                for l=1:length(rmsv)
-                    if rmsv(l) > threshold
-                        temp(l,1)= 1;
-                        tempMeanMuscleActivity(l,1) = rmsv(l);
-                    else
-                        temp(l,1)= 0;
+                threshold0 = 0.5; 
+                threshold1 = 5;
+                threshold2 = 15;
+                threshold3 = 25;
+
+                offLevel = [];
+                lowLevel = [];
+                moderateLevel = [];
+                highLevel = [];
+                veryHighLevel = [];
+
+                % threshold=(rms(rmsv))+zeros(length(rmsv),1);
+                for l=1:length(norm)
+                    if norm(l) <= threshold0
+                        offLevel(l,1) = 1; 
+                    elseif norm(l)  > threshold0 && norm(l) <= threshold1
+                        lowLevel(l,1) = 1;
+                    elseif norm(l) > threshold1 && norm(l) <= threshold2
+                        moderateLevel(l,1) = 1;
+                    elseif norm(l) > threshold2 && norm(l) <= threshold3
+                        highLevel(l,1) = 1;
+                    elseif norm(l) > threshold3
+                        veryHighLevel(l,1) = 1;
                     end
                 end
-                temp = find(temp);
-                tempOnTime = length(temp);
-                onEMGTime(k,j,i) = tempOnTime/2000;
-                offEMGTime(k,j,i) = abs(length(rmsv)-tempOnTime)/2000;
-                
-                tempMeanMuscleActivity = mean(tempMeanMuscleActivity);
-                meanEMG(k,j,i) = tempMeanMuscleActivity*1000; % saved as mV
-                %newData{k,j,i} = norm(:,1); % x,y,z == muscle, task, condition
+                totalTime(k,j,i) = length(norm)/2000; 
+                offTime(k,j,i) = length(find(offLevel))/2000;
+                lowOnTime(k,j,i) = length(find(lowLevel))/2000;
+                moderateOnTime(k,j,i) = length(find(moderateLevel))/2000;
+                highOnTime(k,j,i) = length(find(highLevel))/2000;
+                veryHighOnTime(k,j,i) = length(find(veryHighLevel))/2000;
 
+                %tempMeanMuscleActivity = mean(tempMeanMuscleActivity);
+                %meanEMG(k,j,i) = tempMeanMuscleActivity*1000; % saved as mV
             end
         end
     end
@@ -114,12 +161,14 @@ for m=1:length(t)
         disp(join([names(j), ' ready'], ""))
     end
     %}
+
     %% For Calculations
-    matFile = join([pwd,'/DataEMG/', target, '/', target, '.mat'],"");
-    save(matFile,'meanEMGPercentage', 'maxEMGPercentage', 'minEMGPercentage', "meanEMG", 'onEMGTime', 'offEMGTime')
+
+    matFile = join(["C:/Users/Usuario/","OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\DataEMG\", target, '/', target, '.mat'],"")
+    save(matFile,'meanEMGPercentage', 'maxEMGPercentage', 'minEMGPercentage', 'lowOnTime', 'moderateOnTime', 'highOnTime', 'veryHighOnTime', 'offTime', 'totalTime')
 
     disp('Done');
-    clearvars -except t targetMuscles targetTask targetCondition
+    % clearvars -except t targetMuscles targetTask targetCondition
 
 
 end

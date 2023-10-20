@@ -13,7 +13,7 @@
 
 clc; clear;
 
-targetSubject = "Subject20";
+targetSubject = "Subject34";
 
 % Working directory between workstations
 if exist("C:/Users/Usuario/", 'dir')
@@ -22,18 +22,18 @@ else
     destination = "C:/Users/VICON/";
 end
 
-target1 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Escritura01.csv"],"");
-target2 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Escritura02.csv"],"");
-target3 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Lectura01.csv"],"");
-target4 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Lectura02.csv"],"");
-target5 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Digitacion01.csv"],"");
-target6 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Digitacion02.csv"],"");
-target7 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/FittsPc01.csv"],"");
-target8 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/FittsPc02.csv"],"");
-target9 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/FittsTablet01.csv"],"");
-target10 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/FittsTablet02.csv"],"");
-target11 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Manipulacion01.csv"],"");
-target12 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Escritorio\Data\Experiment\",targetSubject,"/Manipulacion02.csv"],"");
+target1 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Escritura01.csv"],"");
+target2 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Escritura02.csv"],"");
+target3 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Lectura01.csv"],"");
+target4 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Lectura02.csv"],"");
+target5 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Digitacion01.csv"],"");
+target6 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Digitacion02.csv"],"");
+target7 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsPc01.csv"],"");
+target8 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsPc02.csv"],"");
+target9 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet01.csv"],"");
+target10 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet02.csv"],"");
+target11 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion01.csv"],"");
+target12 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion02.csv"],"");
 
 
 startFrame = 12;
