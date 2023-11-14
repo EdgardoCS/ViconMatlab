@@ -1,6 +1,6 @@
 import os
-import glob
-import openpyxl
+# import glob
+# import openpyxl
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -28,7 +28,8 @@ if __name__ == '__main__':
 
     EmgOutput = [targetEMGOutput1, targetEMGOutput2, targetEMGOutput3, targetEMGOutput4, targetEMGOutput5,
                  targetEMGOutput6]
-    EmgMeasurements = [targetEMGMeasurement1, targetEMGMeasurement2, targetEMGMeasurement3, targetEMGMeasurement4, targetEMGMeasurement5]
+    EmgMeasurements = [targetEMGMeasurement1, targetEMGMeasurement2, targetEMGMeasurement3, targetEMGMeasurement4,
+                       targetEMGMeasurement5]
 
     for n_muscles, a in enumerate(EmgOutput):
         for b in EmgMeasurements:
@@ -42,7 +43,8 @@ if __name__ == '__main__':
                 if count != 0 and count <= 35:
                     targetFolder = str(x[0].split('\\')[9])
                     targetFile = str(x[2][1])
-                    newPath = ['C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/Pregrado_Kine_Escritorio/Data/DataEMG/',
+                    newPath = ['C:/Users/Usuario/OneDrive - uv.cl/LabErgonomía/ProyectosTesis/'
+                               'Pregrado_Kine_Escritorio/Data/DataEMG/',
                                targetFolder, '/', targetFile]
 
                     dataFrame = pd.read_excel(textSeparator.join(newPath))
@@ -80,7 +82,7 @@ if __name__ == '__main__':
                             C2.append(np.mean(C2))
                     conditionTwo.append(C2)
 
-            #print(conditionOne)
+            # print(conditionOne)
             # print(conditionTwo)
             dfOne = pd.DataFrame(conditionOne)
             dfOne = dfOne.transpose()

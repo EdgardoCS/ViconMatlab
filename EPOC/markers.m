@@ -3,8 +3,8 @@
 %perimeterEP
 %perimeterET
 
-load data\sujeto3.mat
+load data\sujeto5.mat
 
-data = perimeter.ET1;
+data = perimeter.EB1;
 plot(data)
 findchangepts(data,MaxNumChanges=10,Statistic="rms")
