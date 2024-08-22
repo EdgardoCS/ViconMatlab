@@ -46,7 +46,7 @@ elseif (i==6)
     title('Anterior Serratus')
 end
 
-exportgraphics(fig,'Lamina.png','Resolution',300)
+% exportgraphics(fig,'Lamina.png','Resolution',300)
 
 end
 
@@ -67,26 +67,26 @@ fcl = 300;
 for i = 1:6
     filteredData(:,i) = filtfilt(b,a,muscles(:,6));
 
-% subplot(3,2,i)
-% plot(filteredData(:,i))
-% xlabel('Frequency (Hz)')
-% ylabel('Amplitude (mV)')
-% title('Deltoides Anterior')
-% grid 
-% 
-% if (i ==1)
-%     title('Anterior Deltoid')
-% elseif (i==2)
-%     title('Medial Deltoid ')
-% elseif (i==3)
-%     title('Superior Trapezius')
-% elseif (i==4)
-%     title('Medial Trapezius')
-% elseif (i==5)
-%     title('Inferior Trapezius')
-% elseif (i==6)
-%     title('Anterior Serratus')
-% end
+subplot(3,2,i)
+plot(filteredData(:,i))
+xlabel('Frequency (Hz)')
+ylabel('Amplitude (mV)')
+title('Deltoides Anterior')
+grid 
+
+if (i ==1)
+    title('Anterior Deltoid')
+elseif (i==2)
+    title('Medial Deltoid ')
+elseif (i==3)
+    title('Superior Trapezius')
+elseif (i==4)
+    title('Medial Trapezius')
+elseif (i==5)
+    title('Inferior Trapezius')
+elseif (i==6)
+    title('Anterior Serratus')
+end
 
 % rectifitaction
 

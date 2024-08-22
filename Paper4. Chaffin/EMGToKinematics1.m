@@ -200,10 +200,6 @@ target = rmoutliers(target, "mean");
 fs = 2000; %sample freq
 fn = fs/2; %nyquist freq
 fch = 20;  %cut freq High
-% fcl = 300; %cut freq Low
-
-% 4th order butterworth band-pass
-%[b,a] = butter(4,[fch,fcl]/fn, "bandpass");
 
 % 2nd order butterworth low
 [b,a] = butter(2,fch*1.25/fn,"low");

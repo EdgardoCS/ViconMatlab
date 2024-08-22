@@ -32,10 +32,10 @@ for i=1:length(subjects)
     target4 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Lectura02.csv"],"");
     target5 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Digitacion01.csv"],"");
     target6 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Digitacion02.csv"],"");
-    % target7 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsPc01.csv"],"");
-    % target8 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsPc02.csv"],"");
-    % target9 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet01.csv"],"");
-    % target10 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet02.csv"],"");
+    target7 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsPc01.csv"],"");
+    target8 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsPc02.csv"],"");
+    target9 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet01.csv"],"");
+    target10 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/FittsTablet02.csv"],"");
     target11 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion01.csv"],"");
     target12 = join([destination, "OneDrive - uv.cl\LabErgonomía\ProyectosTesis\Pregrado_Kine_Escritorio\Data\Experiment\",targetSubject,"/Manipulacion02.csv"],"");
 
@@ -46,7 +46,6 @@ for i=1:length(subjects)
 
     modelstart = (((idx_end-idx_start)+2)*20)-2;
     modelend = modelstart+idx_end-idx_start;
-
     C01_T1_Forearm(:,1) = data(modelstart-9:modelend-9,39); %x Column 39 (AM)
     C01_T1_Forearm(:,2) = data(modelstart-9:modelend-9,40); %y Column 40 (AN)
     C01_T1_Forearm(:,3) = data(modelstart-9:modelend-9,41); %z Column 41 (AO)
@@ -136,6 +135,50 @@ for i=1:length(subjects)
     C02_T6_Forearm(:,3) = data(modelstart-9:modelend-9,41);
 
     %%
+    data = readmatrix(target7);
+    idx_start = data(4,1);
+    idx_end = data(end,1);
+
+    modelstart = (((idx_end-idx_start)+2)*20)-2;
+    modelend = modelstart+idx_end-idx_start;
+    Reference_01(:,1) = data(modelstart-9:modelend-9,5); 
+    C01_T4_Forearm(:,1) = data(modelstart-9:modelend-9,39);
+    C01_T4_Forearm(:,2) = data(modelstart-9:modelend-9,40);
+    C01_T4_Forearm(:,3) = data(modelstart-9:modelend-9,41);
+
+    %%
+    data = readmatrix(target8);
+    idx_start = data(4,1);
+    idx_end = data(end,1);
+
+    modelstart = (((idx_end-idx_start)+2)*20)-2;
+    modelend = modelstart+idx_end-idx_start;
+    Reference_02(:,1) = data(modelstart-9:modelend-9,5); 
+    C02_T4_Forearm(:,1) = data(modelstart-9:modelend-9,39);
+    C02_T4_Forearm(:,2) = data(modelstart-9:modelend-9,40);
+    C02_T4_Forearm(:,3) = data(modelstart-9:modelend-9,41);
+  %%
+    data = readmatrix(target9);
+    idx_start = data(4,1);
+    idx_end = data(end,1);
+
+    modelstart = (((idx_end-idx_start)+2)*20)-2;
+    modelend = modelstart+idx_end-idx_start;
+    C01_T5_Forearm(:,1) = data(modelstart-9:modelend-9,39);
+    C01_T5_Forearm(:,2) = data(modelstart-9:modelend-9,40);
+    C01_T5_Forearm(:,3) = data(modelstart-9:modelend-9,41);
+
+    %%
+    data = readmatrix(target10);
+    idx_start = data(4,1);
+    idx_end = data(end,1);
+
+    modelstart = (((idx_end-idx_start)+2)*20)-2;
+    modelend = modelstart+idx_end-idx_start;
+    C02_T5_Forearm(:,1) = data(modelstart-9:modelend-9,39);
+    C02_T5_Forearm(:,2) = data(modelstart-9:modelend-9,40);
+    C02_T5_Forearm(:,3) = data(modelstart-9:modelend-9,41);
+    %%
                                                                                                                            
     C = strsplit(targetSubject,'t');
     targetFile = join(["FS",C(2),".mat"],"");
@@ -143,13 +186,19 @@ for i=1:length(subjects)
     disp(join(['saving data...',targetFile],""))
 
     save(targetFile, ...
+        "Reference_01", ...
+        "Reference_02", ...
         "C01_T1_Forearm", ...
         "C01_T2_Forearm", ...
         "C01_T3_Forearm", ...
+        "C01_T4_Forearm", ...
+        "C01_T5_Forearm", ...
         "C01_T6_Forearm", ...
         "C02_T1_Forearm", ...
         "C02_T2_Forearm", ...
         "C02_T3_Forearm", ...
+        "C02_T4_Forearm", ...
+        "C02_T5_Forearm", ...
         "C02_T6_Forearm"...
         )
 
